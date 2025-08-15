@@ -9,7 +9,7 @@
 
 # most likely things to edit
 TO=${TO:-/d/emacs-build}
-FROM=${FROM:-/c/users/corwi/emacs-build}
+FROM=${FROM:-/c/users/Aqua/emacs-build}
 MV=${MV:-30}
 SRC=${SRC:-$FROM/git/emacs-$MV}
 DIR=${DIR:-$TO/template.directive}
@@ -19,6 +19,9 @@ SVH_CGIT="https://git.savannah.gnu.org/cgit/emacs.git/plain/configure.ac"
 MASTER_VERSION=$(wget -qO - $SVH_CGIT \
 		     | grep AC_INIT \
 		     | perl -ne 'print $1 if /(\d+\.\d+\.\d+)/');
+
+# MASTER_VERSION=31.0.50
+
 # get the first component of master's version, for later
 MASTER_VERSION_MAJOR_VERSION=$(echo $MASTER_VERSION | cut -d . -f 1)
 
@@ -94,12 +97,11 @@ else
      ((./autogen.sh \
 	   && ./configure --with-modules \
 			  --without-dbus \
-			  --with-native-compilation \
+			  --with-native-compilation=aot \
 			  --without-compress-install \
 			  --with-tree-sitter \
 			  CFLAGS=-O2 \
-	   && make install -j 20 \
-		   NATIVE_FULL_AOT=1 \
+	   && make install -j 10 \
 		   prefix=$IN ) |tee $TO/${EB}-make.log
      )  && echo "1..OK make" \
 	 && echo "$SHORT_VER	$LONG_VER" > $IN/.git-revision
@@ -240,12 +242,4 @@ then
        done)  | tee $TO/emacs-${SLUG}-sidr.log
      ) && echo "7..OK prep upload"
     ) || (echo "ERROR: prep upload ($?)"; exit 4);
-fi
-
-if [[ -z "$SSH_USER" ]] || [[ -z "$SSH_KEY" ]] ;
-then
-    echo "Missing SSH info, skipping rsync"
-else
-    rsync -vvrte "/usr/bin/ssh -i $SSH_KEY" "$UP" "${SSH_USER}@corwin.bru.st:~/corwin-emacs/emacs-$MV"
-    ssh -i "$SSH_KEY" "${SSH_USER}@corwin.bru.st" 'cd ~/corwin-emacs/emacs-30; ./update-sym-links.sh'
 fi
