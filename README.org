@@ -1,0 +1,5 @@
+#+title: Build Scripts for building Emacs
+
+This script is modified base on https://corwin.bru.st/emacs-30/build-dist.sh
+
+See more details on https://corwin.bru.st/
