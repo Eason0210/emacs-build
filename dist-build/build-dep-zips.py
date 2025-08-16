@@ -129,7 +129,7 @@ libxml2-2.dll
 zlib1.dll
 liblcms2-2.dll
 libgccjit-0.dll
-libtree-sitter.dll'''.split()
+libtree-sitter-0.25.dll'''.split()
     # job_args=[NEW_EMACS, "--batch", "--eval", ELISP_PROG]
     # #print("args: ", job_args)
     # return subprocess.check_output(job_args, stderr=subprocess.STDOUT
@@ -177,8 +177,7 @@ MUNGE_SRC_PKGS={
     "mingw-w64-ucrt-gettext-runtime":"mingw-w64-ucrt-gettext"
 }
 MUNGE_DEP_PKGS={
-    "mingw-w64-ucrt-x86_64-libwinpthread":"mingw-w64-ucrt-x86_64-libwinpthread-git",
-    "mingw-w64-ucrt-x86_64-libtre": "mingw-w64-ucrt-x86_64-libtre-git",
+    "mingw-w64-ucrt-x86_64-libwinpthread":"mingw-w64-ucrt-x86_64-libwinpthread-git",    
 }
 SRC_EXT={
     "mingw-w64-ucrt-freetype": ".src.tar.zst",
@@ -218,7 +217,7 @@ SRC_EXT={
     "mingw-w64-ucrt-libtasn": ".src.tar.zst",
     "mingw-w64-ucrt-libthai": ".src.tar.zst",
     "mingw-w64-ucrt-libtiff": ".src.tar.zst",
-    "mingw-w64-ucrt-libtre-git": ".src.tar.zst",
+    "mingw-w64-ucrt-libtre": ".src.tar.zst",
     "mingw-w64-ucrt-libwebp": ".src.tar.zst",
     "mingw-w64-ucrt-mpdecimal": ".src.tar.zst",
     "mingw-w64-ucrt-nettle": ".src.tar.zst",
