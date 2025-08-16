@@ -57,7 +57,7 @@ pacman -S --needed \
 #+end_src
 
 ** Create dependencies
-In Msys Shell, run ~build-dep-zips.py~ in ~~$HOME/emacs-build/deps/~
+In Msys Shell, run ~build-dep-zips.py~ in ~$HOME/emacs-build/deps/~
 #+begin_src shell
 mkdir -p ~/emacs-build/deps
 cd ~/emacs-build/deps
