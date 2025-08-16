@@ -31,24 +31,24 @@ EMACS_MAJOR_VERSION= os.getenv('EMACS_MAJOR_VERSION') or "30"
 SRC_REPO="https://repo.msys2.org/mingw/sources"
 
 # Map items in `dynamic-library-alist' to source packages
-PKG_REQ='''mingw-w64-x86_64-giflib
-mingw-w64-x86_64-gnutls
-mingw-w64-x86_64-harfbuzz
-mingw-w64-x86_64-jansson
-mingw-w64-x86_64-lcms2
-mingw-w64-x86_64-libjpeg-turbo
-mingw-w64-x86_64-libpng
-mingw-w64-x86_64-librsvg
-mingw-w64-x86_64-libwebp
-mingw-w64-x86_64-libtiff
-mingw-w64-x86_64-libxml2
-mingw-w64-x86_64-gmp
-mingw-w64-x86_64-xpm-nox
-mingw-w64-x86_64-tree-sitter
-mingw-w64-x86_64-sqlite3'''.split()
+PKG_REQ='''mingw-w64-ucrt-x86_64-giflib
+mingw-w64-ucrt-x86_64-gnutls
+mingw-w64-ucrt-x86_64-harfbuzz
+mingw-w64-ucrt-x86_64-jansson
+mingw-w64-ucrt-x86_64-lcms2
+mingw-w64-ucrt-x86_64-libjpeg-turbo
+mingw-w64-ucrt-x86_64-libpng
+mingw-w64-ucrt-x86_64-librsvg
+mingw-w64-ucrt-x86_64-libwebp
+mingw-w64-ucrt-x86_64-libtiff
+mingw-w64-ucrt-x86_64-libxml2
+mingw-w64-ucrt-x86_64-gmp
+mingw-w64-ucrt-x86_64-xpm-nox
+mingw-w64-ucrt-x86_64-tree-sitter
+mingw-w64-ucrt-x86_64-sqlite3'''.split()
 
 # Emacs style path to dependency DLLs on build system
-DLL_SRC="c:/msys64/mingw64/bin"
+DLL_SRC="c:/msys64/ucrt64/bin"
 
 # libraries we never include
 DLL_SKIP=["libgccjit-0.dll"]
@@ -95,7 +95,7 @@ def gather_deps():
         if dep not in DLL_SKIP:
             if args.l != True:
                 print("Adding dep", dep)
-            check_output_maybe(["cp /mingw64/bin/{} .".format(dep)], shell=True)
+            check_output_maybe(["cp /ucrt64/bin/{} .".format(dep)], shell=True)
         else:
             if args.l != True:
                 print("Skipping dep", dep)
@@ -144,8 +144,8 @@ def full_dll_dependency(dlls):
 
 # Dependencies for a given DLL
 def dll_dependency(dll):
-    output = check_output(["/mingw64/bin/ntldd", "--recursive",
-                           "/mingw64/bin/{}".format(dll)]
+    output = check_output(["/ucrt64/bin/ntldd", "--recursive",
+                           "/ucrt64/bin/{}".format(dll)]
                           ).decode("utf-8")
     ## munge output
     return ntldd_munge(output)
@@ -157,11 +157,11 @@ def ntldd_munge(out):
         ## Output looks something like this
 
         ## KERNEL32.dll => C:\Windows\SYSTEM32\KERNEL32.dll (0x0000000002a30000)
-        ## libwinpthread-1.dll => C:\msys64\mingw64\bin\libwinpthread-1.dll (0x0000000000090000)
+        ## libwinpthread-1.dll => C:\msys64\ucrt64\bin\libwinpthread-1.dll (0x0000000000090000)
 
         ## if it's the former, we want it, if its the later we don't
         splt = dep.split()
-        if len(splt) > 2 and "mingw64" in splt[2]:
+        if len(splt) > 2 and "ucrt64" in splt[2]:
             rtn.append(splt[0])
 
     return rtn
@@ -170,78 +170,78 @@ def ntldd_munge(out):
 
 ## Packages to fiddle with
 ## Source for gcc-libs is part of gcc
-SKIP_SRC_PKGS=["mingw-w64-gcc-libs"]
-SKIP_DEP_PKGS=["mingw-w64-glib2", "mingw-w64-ca-certificates-20211016-3"]
+SKIP_SRC_PKGS=["mingw-w64-ucrt-gcc-libs"]
+SKIP_DEP_PKGS=["mingw-w64-ucrt-glib2", "mingw-w64-ucrt-ca-certificates-20211016-3"]
 MUNGE_SRC_PKGS={
-    "mingw-w64-libwinpthread-git":"mingw-w64-winpthreads-git",
-    "mingw-w64-gettext-runtime":"mingw-w64-gettext"
+    "mingw-w64-ucrt-libwinpthread-git":"mingw-w64-ucrt-winpthreads-git",
+    "mingw-w64-ucrt-gettext-runtime":"mingw-w64-ucrt-gettext"
 }
 MUNGE_DEP_PKGS={
-    "mingw-w64-x86_64-libwinpthread":"mingw-w64-x86_64-libwinpthread-git",
-    "mingw-w64-x86_64-libtre": "mingw-w64-x86_64-libtre-git",
+    "mingw-w64-ucrt-x86_64-libwinpthread":"mingw-w64-ucrt-x86_64-libwinpthread-git",
+    "mingw-w64-ucrt-x86_64-libtre": "mingw-w64-ucrt-x86_64-libtre-git",
 }
 SRC_EXT={
-    "mingw-w64-freetype": ".src.tar.zst",
-    "mingw-w64-fribidi": ".src.tar.zst",
-    "mingw-w64-glib2": ".src.tar.zst",
-    "mingw-w64-harfbuzz": ".src.tar.zst",
-    "mingw-w64-libunistring": ".src.tar.zst",
-    "mingw-w64-winpthreads-git": ".src.tar.zst",
-    "mingw-w64-ca-certificates": ".src.tar.zst",
-    "mingw-w64-libxml2": ".src.tar.zst",
-    "mingw-w64-ncurses": ".src.tar.zst",
-    "mingw-w64-openssl": ".src.tar.zst",
-    "mingw-w64-pango": ".src.tar.zst",
-    "mingw-w64-python": ".src.tar.zst",
-    "mingw-w64-sqlite3": ".src.tar.zst",
-    "mingw-w64-xpm-nox": ".src.tar.zst",
-    "mingw-w64-xz": ".src.tar.zst",
-    "mingw-w64-bzip2": ".src.tar.zst",
-    "mingw-w64-cairo": ".src.tar.zst",
-    "mingw-w64-expat": ".src.tar.zst",
-    "mingw-w64-fontconfig":  ".src.tar.zst",
-    "mingw-w64-gdk-pixbuf2":  ".src.tar.zst",
-    "mingw-w64-giflib":  ".src.tar.zst",
-    "mingw-w64-gmp":  ".src.tar.zst",
-    "mingw-w64-gnutls":  ".src.tar.zst",
-    "mingw-w64-graphite2":  ".src.tar.zst",
-    "mingw-w64-jbigkit":  ".src.tar.zst",
-    "mingw-w64-lcms2":  ".src.tar.zst",
-    "mingw-w64-lerc":  ".src.tar.zst",
-    "mingw-w64-libdatrie":  ".src.tar.zst",
-    "mingw-w64-libffi":  ".src.tar.zst",
-    "mingw-w64-libiconv":  ".src.tar.zst",
-    "mingw-w64-libiconv":  ".src.tar.zst",
-    "mingw-w64-libpng":  ".src.tar.zst",
-    "mingw-w64-librsvg": ".src.tar.zst",
-    "mingw-w64-libsystre": ".src.tar.zst",
-    "mingw-w64-libtasn": ".src.tar.zst",
-    "mingw-w64-libthai": ".src.tar.zst",
-    "mingw-w64-libtiff": ".src.tar.zst",
-    "mingw-w64-libtre-git": ".src.tar.zst",
-    "mingw-w64-libwebp": ".src.tar.zst",
-    "mingw-w64-mpdecimal": ".src.tar.zst",
-    "mingw-w64-nettle": ".src.tar.zst",
-    "mingw-w64-p11-kit": ".src.tar.zst",
-    "mingw-w64-pcre": ".src.tar.zst",
-    "mingw-w64-pixman": ".src.tar.zst",
-    "mingw-w64-python-packaging": ".src.tar.zst",
-    "mingw-w64-readline": ".src.tar.zst",
-    "mingw-w64-tcl": ".src.tar.zst",
-    "mingw-w64-termcap": ".src.tar.zst",
-    "mingw-w64-tk": ".src.tar.zst",
-    "mingw-w64-tree-sitter": ".src.tar.zst",
-    "mingw-w64-tzdata": ".src.tar.zst",
-    "mingw-w64-wineditline": ".src.tar.zst",
-    "mingw-w64-zlib": ".src.tar.zst",
-    "mingw-w64-zstd": ".src.tar.zst",
-    "mingw-w64-brotli": ".src.tar.zst",
-    "mingw-w64-gettext": ".src.tar.zst",
-    "mingw-w64-libdeflate": ".src.tar.zst",
-    "mingw-w64-libidn2": ".src.tar.zst",
-    "mingw-w64-libjpeg-turbo": ".src.tar.zst",
-    "mingw-w64-libtasn1": ".src.tar.zst",
-    "mingw-w64-pcre2": ".src.tar.zst",
+    "mingw-w64-ucrt-freetype": ".src.tar.zst",
+    "mingw-w64-ucrt-fribidi": ".src.tar.zst",
+    "mingw-w64-ucrt-glib2": ".src.tar.zst",
+    "mingw-w64-ucrt-harfbuzz": ".src.tar.zst",
+    "mingw-w64-ucrt-libunistring": ".src.tar.zst",
+    "mingw-w64-ucrt-winpthreads-git": ".src.tar.zst",
+    "mingw-w64-ucrt-ca-certificates": ".src.tar.zst",
+    "mingw-w64-ucrt-libxml2": ".src.tar.zst",
+    "mingw-w64-ucrt-ncurses": ".src.tar.zst",
+    "mingw-w64-ucrt-openssl": ".src.tar.zst",
+    "mingw-w64-ucrt-pango": ".src.tar.zst",
+    "mingw-w64-ucrt-python": ".src.tar.zst",
+    "mingw-w64-ucrt-sqlite3": ".src.tar.zst",
+    "mingw-w64-ucrt-xpm-nox": ".src.tar.zst",
+    "mingw-w64-ucrt-xz": ".src.tar.zst",
+    "mingw-w64-ucrt-bzip2": ".src.tar.zst",
+    "mingw-w64-ucrt-cairo": ".src.tar.zst",
+    "mingw-w64-ucrt-expat": ".src.tar.zst",
+    "mingw-w64-ucrt-fontconfig":  ".src.tar.zst",
+    "mingw-w64-ucrt-gdk-pixbuf2":  ".src.tar.zst",
+    "mingw-w64-ucrt-giflib":  ".src.tar.zst",
+    "mingw-w64-ucrt-gmp":  ".src.tar.zst",
+    "mingw-w64-ucrt-gnutls":  ".src.tar.zst",
+    "mingw-w64-ucrt-graphite2":  ".src.tar.zst",
+    "mingw-w64-ucrt-jbigkit":  ".src.tar.zst",
+    "mingw-w64-ucrt-lcms2":  ".src.tar.zst",
+    "mingw-w64-ucrt-lerc":  ".src.tar.zst",
+    "mingw-w64-ucrt-libdatrie":  ".src.tar.zst",
+    "mingw-w64-ucrt-libffi":  ".src.tar.zst",
+    "mingw-w64-ucrt-libiconv":  ".src.tar.zst",
+    "mingw-w64-ucrt-libiconv":  ".src.tar.zst",
+    "mingw-w64-ucrt-libpng":  ".src.tar.zst",
+    "mingw-w64-ucrt-librsvg": ".src.tar.zst",
+    "mingw-w64-ucrt-libsystre": ".src.tar.zst",
+    "mingw-w64-ucrt-libtasn": ".src.tar.zst",
+    "mingw-w64-ucrt-libthai": ".src.tar.zst",
+    "mingw-w64-ucrt-libtiff": ".src.tar.zst",
+    "mingw-w64-ucrt-libtre-git": ".src.tar.zst",
+    "mingw-w64-ucrt-libwebp": ".src.tar.zst",
+    "mingw-w64-ucrt-mpdecimal": ".src.tar.zst",
+    "mingw-w64-ucrt-nettle": ".src.tar.zst",
+    "mingw-w64-ucrt-p11-kit": ".src.tar.zst",
+    "mingw-w64-ucrt-pcre": ".src.tar.zst",
+    "mingw-w64-ucrt-pixman": ".src.tar.zst",
+    "mingw-w64-ucrt-python-packaging": ".src.tar.zst",
+    "mingw-w64-ucrt-readline": ".src.tar.zst",
+    "mingw-w64-ucrt-tcl": ".src.tar.zst",
+    "mingw-w64-ucrt-termcap": ".src.tar.zst",
+    "mingw-w64-ucrt-tk": ".src.tar.zst",
+    "mingw-w64-ucrt-tree-sitter": ".src.tar.zst",
+    "mingw-w64-ucrt-tzdata": ".src.tar.zst",
+    "mingw-w64-ucrt-wineditline": ".src.tar.zst",
+    "mingw-w64-ucrt-zlib": ".src.tar.zst",
+    "mingw-w64-ucrt-zstd": ".src.tar.zst",
+    "mingw-w64-ucrt-brotli": ".src.tar.zst",
+    "mingw-w64-ucrt-gettext": ".src.tar.zst",
+    "mingw-w64-ucrt-libdeflate": ".src.tar.zst",
+    "mingw-w64-ucrt-libidn2": ".src.tar.zst",
+    "mingw-w64-ucrt-libjpeg-turbo": ".src.tar.zst",
+    "mingw-w64-ucrt-libtasn1": ".src.tar.zst",
+    "mingw-w64-ucrt-pcre2": ".src.tar.zst",
 }
 
 ## Currently no packages seem to require this!
@@ -315,7 +315,7 @@ def gather_source(deps):
             check_output(["pacman","-Q", pkg]).decode("utf-8").strip()
 
         ## Produces output like:
-        ## mingw-w64-x86_64-zlib 2.43.2
+        ## mingw-w64-ucrt-x86_64-zlib 2.43.2
         pkg_name_components = pkg_name_and_version.split()
         pkg_name=pkg_name_components[0]
         pkg_version=pkg_name_components[1]
@@ -339,7 +339,7 @@ def gather_source(deps):
 
         download_source(tarball)
 
-    srczip="../emacs-{}-{}deps-mingw-w64-src.zip".format(EMACS_MAJOR_VERSION,DATE)
+    srczip="../emacs-{}-{}deps-mingw-w64-ucrt-src.zip".format(EMACS_MAJOR_VERSION,DATE)
     tmpzip="{}.tmp".format(srczip)
     print("Zipping Dsrc in", os.getcwd(), "as", tmpzip)
     check_output_maybe("zip -9 {} *".format(tmpzip), shell=True)
