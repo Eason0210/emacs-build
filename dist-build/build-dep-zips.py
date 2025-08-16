@@ -34,7 +34,6 @@ SRC_REPO="https://repo.msys2.org/mingw/sources"
 PKG_REQ='''mingw-w64-ucrt-x86_64-giflib
 mingw-w64-ucrt-x86_64-gnutls
 mingw-w64-ucrt-x86_64-harfbuzz
-mingw-w64-ucrt-x86_64-jansson
 mingw-w64-ucrt-x86_64-lcms2
 mingw-w64-ucrt-x86_64-libjpeg-turbo
 mingw-w64-ucrt-x86_64-libpng
