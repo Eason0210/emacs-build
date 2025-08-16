@@ -28,7 +28,8 @@ from subprocess import check_output
 EMACS_MAJOR_VERSION= os.getenv('EMACS_MAJOR_VERSION') or "30"
 
 # Base URI for the package sources mapped in PKG_REQ
-SRC_REPO="https://repo.msys2.org/mingw/sources"
+# SRC_REPO="https://repo.msys2.org/mingw/sources"
+SRC_REPO="https://mirrors.ustc.edu.cn/msys2/mingw/sources"
 
 # Map items in `dynamic-library-alist' to source packages
 PKG_REQ='''mingw-w64-ucrt-x86_64-giflib
