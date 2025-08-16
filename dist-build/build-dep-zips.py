@@ -170,14 +170,14 @@ def ntldd_munge(out):
 
 ## Packages to fiddle with
 ## Source for gcc-libs is part of gcc
-SKIP_SRC_PKGS=["mingw-w64-gcc-libs"]
-SKIP_DEP_PKGS=["mingw-w64-glib2", "mingw-w64-ca-certificates-20211016-3"]
+SKIP_SRC_PKGS=["mingw-w64-ucrt-gcc-libs"]
+SKIP_DEP_PKGS=["mingw-w64-ucrt-glib2", "mingw-w64-ucrt-ca-certificates-20241223-1"]
 MUNGE_SRC_PKGS={
-    "mingw-w64-libwinpthread-git":"mingw-w64-winpthreads-git",
-    "mingw-w64-gettext-runtime":"mingw-w64-gettext"
+    "mingw-w64-ucrt-libwinpthread-git":"mingw-w64-ucrt-winpthreads-git",
+    "mingw-w64-ucrt-gettext-runtime":"mingw-w64-ucrt-gettext"
 }
 MUNGE_DEP_PKGS={
-    "mingw-w64-x86_64-libwinpthread":"mingw-w64-x86_64-libwinpthread-git",    
+    "mingw-w64-ucrt-x86_64-libwinpthread":"mingw-w64-ucrt-x86_64-libwinpthread-git",    
 }
 SRC_EXT={
     "mingw-w64-freetype": ".src.tar.zst",
@@ -328,12 +328,12 @@ def gather_source(deps):
         ## Switch names if necessary
         pkg_name = MUNGE_SRC_PKGS.get(pkg_name,pkg_name)
 
-        ## src archive is usually a .tar.gz
+        ## src archive is usually a .tar.zst
         if pkg_name in SRC_EXT.keys():
             src_ext = SRC_EXT[pkg_name]
         else:
-            src_ext = ".src.tar.gz"
-
+            src_ext = ".src.tar.zst"
+        pkg_name = pkg_name.replace("-ucrt", "")
         tarball = "{}-{}{}".format(pkg_name,pkg_version,src_ext)
 
         download_source(tarball)
