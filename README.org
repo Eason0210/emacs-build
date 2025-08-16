@@ -3,3 +3,64 @@
 This script is modified base on https://corwin.bru.st/emacs-30/build-dist.sh
 
 See more details on https://corwin.bru.st/
+
+* Usage
+** Install packages in ~ucrt64~
+#+begin_src shell
+pacman -S --needed base-devel \
+  mingw-w64-ucrt-x86_64-toolchain \
+  mingw-w64-ucrt-x86_64-xpm-nox \
+  mingw-w64-ucrt-x86_64-gmp \
+  mingw-w64-ucrt-x86_64-gnutls \
+  mingw-w64-ucrt-x86_64-libtiff \
+  mingw-w64-ucrt-x86_64-giflib \
+  mingw-w64-ucrt-x86_64-libpng \
+  mingw-w64-ucrt-x86_64-libjpeg-turbo \
+  mingw-w64-ucrt-x86_64-librsvg \
+  mingw-w64-ucrt-x86_64-libwebp \
+  mingw-w64-ucrt-x86_64-lcms2 \
+  mingw-w64-ucrt-x86_64-libxml2 \
+  mingw-w64-ucrt-x86_64-zlib \
+  mingw-w64-ucrt-x86_64-harfbuzz \
+  mingw-w64-ucrt-x86_64-libgccjit \
+  mingw-w64-ucrt-x86_64-sqlite3 \
+  mingw-w64-ucrt-x86_64-libtree-sitter\
+  mingw-w64-ucrt-x86_64-enchant \
+  mingw-w64-ucrt-x86_64-aspell \
+  mingw-w64-ucrt-x86_64-aspell-en \
+  mingw-w64-ucrt-x86_64-hunspell \
+  mingw-w64-ucrt-x86_64-hunspell-en \
+  mingw-w64-ucrt-x86_64-texinfo \
+  mingw-w64-ucrt-x86_64-ntldd
+  
+  
+pacman -S --needed \
+  autoconf \
+  autogen \
+  automake \
+  automake-wrapper \
+  git \
+  make \
+  makensis \
+  zip \
+  unzip \
+  man-db
+
+#+end_src
+
+** Create dependencies
+In Msys Shell, run ~build-dep-zips.py~ in ~~$HOME/emacs-build/deps/~
+#+begin_src shell
+python ./build-dep-zips.py
+#+end_src
+
+** Build Emacs
+
+run ~build-dist.sh~ in Msys ~ucrt64~ shell
+
+
+
+
+
+
+
