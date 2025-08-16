@@ -5,6 +5,7 @@ This script is modified base on https://corwin.bru.st/emacs-30/build-dist.sh
 See more details on https://corwin.bru.st/
 
 * Usage
+Install Msys2: https://www.msys2.org/
 ** Install packages in ~ucrt64~
 #+begin_src shell
 pacman -S --needed base-devel \
