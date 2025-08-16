@@ -4,6 +4,13 @@ This script is modified base on https://corwin.bru.st/emacs-30/build-dist.sh
 
 See more details on https://corwin.bru.st/
 
+* Clone Emacs git repos
+#+begin_src shell
+mkdir -p ~/emacs-build/git
+cd ~/emacs-build/git
+git clone https://https.git.savannah.gnu.org/git/emacs.git
+#+end_src
+
 * Usage
 Install Msys2: https://www.msys2.org/
 ** Install packages in ~ucrt64~
@@ -52,12 +59,16 @@ pacman -S --needed \
 ** Create dependencies
 In Msys Shell, run ~build-dep-zips.py~ in ~~$HOME/emacs-build/deps/~
 #+begin_src shell
+mkdir -p ~/emacs-build/deps
+cd ~/emacs-build/deps
 python ./build-dep-zips.py
 #+end_src
 
 ** Build Emacs
 
 run ~build-dist.sh~ in Msys ~ucrt64~ shell
+
+The artifacts will be created under ~D:\emacs-build\upload~ folder
 
 
 
