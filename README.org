@@ -8,7 +8,7 @@ See more details on https://corwin.bru.st/
 #+begin_src shell
 mkdir -p ~/emacs-build/git
 cd ~/emacs-build/git
-git clone https://https.git.savannah.gnu.org/git/emacs.git
+git clone https://https.git.savannah.gnu.org/git/emacs.git emacs-30
 #+end_src
 
 * Usage
@@ -61,14 +61,17 @@ In Msys Shell, run ~build-dep-zips.py~ in ~$HOME/emacs-build/deps/~
 #+begin_src shell
 mkdir -p ~/emacs-build/deps
 cd ~/emacs-build/deps
+# copy build-dep-zips.py from dist-build/build-dep-zips.py
+# then run build-dep-zips.py in deps directory
 python ./build-dep-zips.py
 #+end_src
 
 ** Build Emacs
 
-run ~build-dist.sh~ in Msys ~ucrt64~ shell
+run ~build-dist.sh~ in Msys ~ucrt64~ shell to build Emacs. If the source repos of Emacs is in emacs-30 branch, it will build Emacs 30, if it's in master branch, it will build Emacs 31.0.50. I prefer building the master branch for personally use.
 
-The artifacts will be created under ~D:\emacs-build\upload~ folder
+The artifacts will be created under ~D:\emacs-build\upload~ folder, the emacs-31.0.50-xxxxxx-installer.exe and emacs-31.0.50-xxxxxx.zip
+include all dependency dlls, so you can run Emacs without Msys2 installed.
 
 
 
