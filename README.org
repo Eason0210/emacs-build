@@ -52,7 +52,8 @@ pacman -S --needed \
   make \
   zip \
   unzip \
-  man-db
+  man-db \
+  python
 
 #+end_src
 
