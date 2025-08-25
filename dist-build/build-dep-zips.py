@@ -170,14 +170,13 @@ def ntldd_munge(out):
 
 ## Packages to fiddle with
 ## Source for gcc-libs is part of gcc
-SKIP_SRC_PKGS=["mingw-w64-ucrt-gcc-libs"]
-SKIP_DEP_PKGS=["mingw-w64-ucrt-glib2", "mingw-w64-ucrt-ca-certificates-20241223-1"]
-MUNGE_SRC_PKGS={
-    "mingw-w64-ucrt-libwinpthread-git":"mingw-w64-ucrt-winpthreads-git",
+SKIP_SRC_PKGS=["mingw-w64-ucrt-gcc-libs", "mingw-w64-ucrt-libwinpthread"]
+SKIP_DEP_PKGS=["mingw-w64-ucrt-glib2", "mingw-w64-ucrt-ca-certificates-20241223-1", "mingw-w64-ucrt-x86_64-cc-libs"]
+MUNGE_SRC_PKGS={    
     "mingw-w64-ucrt-gettext-runtime":"mingw-w64-ucrt-gettext"
 }
 MUNGE_DEP_PKGS={
-    "mingw-w64-ucrt-x86_64-libwinpthread":"mingw-w64-ucrt-x86_64-libwinpthread-git",    
+    "mingw-w64-ucrt-x86_64-libwinpthread-git":"mingw-w64-ucrt-x86_64-libwinpthread",
 }
 SRC_EXT={
     "mingw-w64-ucrt-freetype": ".src.tar.zst",
