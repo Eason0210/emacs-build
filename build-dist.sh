@@ -90,6 +90,8 @@ fi
 
 sleep 10;
 
+NCPU=$(expr $(getconf _NPROCESSORS_ONLN) / 2)
+
 if [[ -d $IN ]] ; then
     echo "NOTICE: build dir exits: $IN"
 else
@@ -101,7 +103,7 @@ else
 			  --without-compress-install \
 			  --with-tree-sitter \
 			  CFLAGS=-O2 \
-	   && make install -j 10 \
+	   && make install -j $NCPU \
 		   prefix=$IN ) |tee $TO/${EB}-make.log
      )  && echo "1..OK make" \
 	 && echo "$SHORT_VER	$LONG_VER" > $IN/.git-revision
