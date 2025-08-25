@@ -39,7 +39,8 @@ pacman -S --needed base-devel \
   mingw-w64-ucrt-x86_64-hunspell \
   mingw-w64-ucrt-x86_64-hunspell-en \
   mingw-w64-ucrt-x86_64-texinfo \
-  mingw-w64-ucrt-x86_64-ntldd
+  mingw-w64-ucrt-x86_64-ntldd \
+  mingw-w64-ucrt-x86_64-nsis
   
   
 pacman -S --needed \
@@ -49,7 +50,6 @@ pacman -S --needed \
   automake-wrapper \
   git \
   make \
-  makensis \
   zip \
   unzip \
   man-db
