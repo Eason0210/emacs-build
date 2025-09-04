@@ -76,8 +76,8 @@ run ~build-dist.sh~ in Msys ~ucrt64~ shell to build Emacs. If the source repos o
 The artifacts will be created under ~D:\emacs-build\upload~ folder, the emacs-31.0.50-xxxxxx-installer.exe and emacs-31.0.50-xxxxxx.zip
 include all dependency dlls, so you can run Emacs without Msys2 installed.
 
-
-
+* Release log
+- 2025-09-04 [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?id=446c037d57a23c575d9a4079cc1be7d6709e5c1b][emacs-31.0.50-446c037]]
 
 
 
