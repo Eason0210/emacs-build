@@ -32,7 +32,7 @@ pacman -S --needed base-devel \
   mingw-w64-ucrt-x86_64-harfbuzz \
   mingw-w64-ucrt-x86_64-libgccjit \
   mingw-w64-ucrt-x86_64-sqlite3 \
-  mingw-w64-ucrt-x86_64-tree-sitter
+  mingw-w64-ucrt-x86_64-tree-sitter \
   mingw-w64-ucrt-x86_64-libtree-sitter\
   mingw-w64-ucrt-x86_64-enchant \
   mingw-w64-ucrt-x86_64-aspell \
