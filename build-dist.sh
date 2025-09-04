@@ -8,7 +8,7 @@
 #
 
 # most likely things to edit
-TO=${TO:-/d/emacs-build}
+TO=${TO:-/e/emacs-build}
 FROM=${FROM:-/c/users/Aqua/emacs-build}
 MV=${MV:-30}
 SRC=${SRC:-$FROM/git/emacs-$MV}
