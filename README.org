@@ -80,6 +80,7 @@ include all dependency dlls, so you can run Emacs without Msys2 installed.
 - 2025-09-04 [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?id=446c037d57a23c575d9a4079cc1be7d6709e5c1b][emacs-31.0.50-446c037]]
 - 2025-10-03 [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=feature/igc&id=1e98935bb61e0e629ba6b8644fe81a61f27cee58][emacs-31.0.50-1e9893]]( with igc support)
 - 2025-10-26 [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=feature/igc&id=6b8b553aa8ba514ca794598e7f68ec532a4ccc90][emacs-31.0.50-6b8b55]]( with igc support)
+- 2025-11-24 [[https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=feature/igc&id=ec8e64f2a5cd9c02c2afdcc21509141c6a9c3989][emacs-31.0.50-ec8e64]]( with igc support)
 
 
 
